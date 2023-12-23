@@ -28,4 +28,4 @@ RUN /etc/init.d/mmaker_routproc start
 
 RUN ssh-keygen -t rsa -b 2048 -f /etc/ssh/ssh_host_rsa_key -N ''
 RUN groupadd -g 500 mmaker && useradd -g 500 -u 500 micro
-#EXPOSE 22
+EXPOSE 22
