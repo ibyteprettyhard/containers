@@ -1,0 +1,62 @@
+#!/bin/bash
+#
+#  Startup script for the Routproc (Milemaker Daemon)
+#
+# chkconfig: - 95 02
+# processname: routproc
+
+# Source function library.
+. /etc/rc.d/init.d/functions
+
+# Execute MMaker Environment Variable
+. /usr/micro/profile.current
+
+pidfile=${PIDFILE-/var/tmp/routproc.pid}
+routproc=${ROUTPROC-/usr/micro/g19/exe/routproc &}
+prog=routproc
+
+start() {
+        echo -n $"Starting $prog: "
+        daemon $routproc
+        RETVAL=$?
+        echo
+        [ $RETVAL = 0 ] 
+        return $RETVAL
+}
+stop() {
+        echo -n $"Stopping $prog: "
+        killproc $routproc
+        RETVAL=$?
+        echo
+        [ $RETVAL = 0 ] && rm -f ${pidfile}
+}
+
+
+# See how we were called.
+case "$1" in
+  start)
+        start
+        ;;
+  stop)
+        stop
+        ;;
+  status)
+        status $routproc
+        RETVAL=$?
+        ;;
+  restart)
+        stop
+        start
+        ;;
+  condrestart)
+        if [ -f ${pidfile} ] ; then
+                stop
+                start
+        fi
+        ;;
+  *)
+        echo $"Usage: $prog {start|stop|restart|condrestart|status}"
+        exit 1
+esac
+
+exit $RETVAL
