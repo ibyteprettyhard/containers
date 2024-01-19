@@ -3,3 +3,4 @@ rsyslog/server-cert.pem
 rsyslog/server-key.pem
 rsyslog/cfp-ca.pem
 rsyslog/rsyslog_additions.conf
+.gitignore
