@@ -1,1 +1,2 @@
-This repo houses the building of Docker containers
+# Container Repo. 
+Used for the storage of Dockerfiles.  Sensitive files have been .gitignored
